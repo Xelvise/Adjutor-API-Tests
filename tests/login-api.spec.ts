@@ -123,9 +123,9 @@ async function getCredentials() {
         const onboardResponse = await onboardContext.put('https://vigil.lendsqr.com/pecunia/api/v2/onboard/complete', {headers: httpHeader});
         console.log(`User onboarding status - ${onboardResponse.status()}`);
         console.log(await onboardResponse.json());
-        // if (!onboardResponse.ok()) {
-        //     throw new Error("Failed to complete final onboarding");
-        // }
+        if (!onboardResponse.ok()) {
+            throw new Error("Failed to complete final onboarding");
+        }
         return {
             email: inbox.emailAddress,
             inbox_ID: inbox.id,
