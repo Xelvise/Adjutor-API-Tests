@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "regression": "npx playwright test",
+    "ui-test": "npx playwright test tests/UI-test/end-to-end-ui-tests.spec.ts",
+    "api-test": "npx playwright test tests/api-test/"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@playwright/test": "^1.45.1",
     "@types/node": "^20.14.10",
+    "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.4.5",
     "js-generate-password": "^1.0.0",
     "mailslurp-client": "^15.20.2",

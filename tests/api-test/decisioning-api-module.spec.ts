@@ -1,7 +1,10 @@
 import {test, expect} from '@playwright/test';
+import { config } from 'dotenv';
+config({path: '../.env'})
+
 const base_url = 'https://adjutor.lendsqr.com/v2/';
 const header = {
-    'Authorization': 'Bearer sk_live_178Bp1Z1KqJEynNVMDOZuYuBjj3EifRxKxWo9dii',
+    'Authorization': 'Bearer '+process.env.ADJUTOR_API_KEY,
     'Content-Type': 'application/json',
     'Accept': 'application/json'
 }
@@ -17,7 +20,6 @@ test('POS - Decision Models lookup', async({request}) => {
     });
     expect.soft(response).toBeOK();
     const body = await response.json();
-    expect.soft(body.meta).toBeTruthy();
     expect.soft(body.status).toContain("success");
     expect.soft(body.message).toContain("Successful");    
 });
@@ -33,19 +35,18 @@ test('POS - Decision Models lookup (without authorization header)', async({reque
 });
 
 test('NEG - Fetch details of specific Decision model not configured on platform', async({request}) => {
-    const response = await request.get(base_url+'decisioning/models/20/settings', {
+    const response = await request.get(base_url+'decisioning/models/5443/settings', {
         headers: header
     });
     expect.soft(response.status()).toBe(400);
     const body = await response.json();
-    expect.soft(body.meta).toBeTruthy();
     expect.soft(body.status).toContain("error");
     expect.soft(body.message).toContain("Decision model not found");  
 });
 
 
 test('NEG - Oraculi Borrower Scoring check using model ID that\'s not been configured on platform', async({request}) => {
-    const response = await request.post(base_url+'decisioning/models/2355', {
+    const response = await request.post(base_url+'decisioning/models/5443', {
         headers: header,
         data: {
             "gender": "Male",

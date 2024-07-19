@@ -1,7 +1,10 @@
 import {test, expect} from '@playwright/test';
+import { config } from 'dotenv';
+config({path: '../.env'})
+
 const base_url = 'https://adjutor.lendsqr.com/v2/';
 const header = {
-    'Authorization': 'Bearer sk_live_aZ2LFDwTXNajok0TCYUHYc09liT25uKuAVAAfY2T',
+    'Authorization': 'Bearer '+process.env.ADJUTOR_API_KEY,
     'Content-Type': 'application/json',
     'Accept': 'application/json'
 };
@@ -11,7 +14,7 @@ const xheader = {
 };
 
 test('POS - Get Credit report from CRC using valid 11-digits BVN', async ({request}) => {
-    const response = await request.get(base_url+'creditbureaus/crc/22511513079', {
+    const response = await request.get(base_url+'creditbureaus/crc/'+process.env.BVN, {
         headers: header
     });
     expect.soft(response).toBeOK();
@@ -33,7 +36,7 @@ test('POS - Get Credit report from CRC using invalid 11-digits BVN', async ({req
 
 
 test('POS - Get Credit report from CRC using valid 11-digits BVN without authorization header', async ({request}) => {
-    const response = await request.get(base_url+'creditbureaus/crc/22511513079', {
+    const response = await request.get(base_url+'creditbureaus/crc/'+process.env.BVN, {
         headers: xheader
     });
     expect.soft(response.status()).toBe(401);
@@ -44,7 +47,7 @@ test('POS - Get Credit report from CRC using valid 11-digits BVN without authori
 
 
 test('POS - Get Credit report from FirstCentral Credit Bureau using valid 11-digits BVN', async ({request}) => {
-    const response = await request.get(base_url+'creditbureaus/firstcentral/22511513079', {
+    const response = await request.get(base_url+'creditbureaus/firstcentral/'+process.env.BVN, {
         headers: header
     });
     expect.soft(response).toBeOK();
@@ -66,7 +69,7 @@ test('POS - Get Credit report from FirstCentral Credit Bureau using invalid 11-d
 
 
 test('POS - Get Credit report from FirstCentral Credit Bureau using valid 11-digits BVN without authorization header', async ({request}) => {
-    const response = await request.get(base_url+'creditbureaus/firstcentral/22511513079', {
+    const response = await request.get(base_url+'creditbureaus/firstcentral/'+process.env.BVN, {
         headers: xheader
     });
     expect.soft(response.status()).toBe(401);

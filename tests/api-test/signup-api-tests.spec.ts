@@ -1,8 +1,12 @@
 import {GeneratePassword} from 'js-generate-password';
 import  MailSlurp  from 'mailslurp-client';
-
+import { faker } from '@faker-js/faker';
 import { test, expect} from '@playwright/test';
-const endpoint = 'https://vigil.lendsqr.com/pecunia/api/v2/auth/admin/login';
+import { config } from "dotenv";
+
+config({path: './.env'});   // load environment variables from .env file
+
+const endpoint = 'https://vigil.lendsqr.com/pecunia/api/v2/onboard';
 const header = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -12,21 +16,22 @@ const header = {
     'x-api-key': 'P5cuQ6v3lkTdZQzejgeEE0VHcD2sf2xaXTDH1P5R'
 }
 
-// create a new instance of MailSlurp
-const mailslurp = new MailSlurp({ apiKey: "f31f7daea6f3f0982104d1a26b1f4b8f66ea61670e4b21fc338f5b1fb7392769" });
+const apiKey = process.env.MAILSLURP_API_KEY;
+if (!apiKey) {throw new Error("MAILSLURP_API_KEY is not defined")}
+const mailslurp = new MailSlurp({apiKey});      // create a new instance of MailSlurp
 
 test('Validate Account creation by entering valid and accurate credentials', async ({request}) => {
     const inbox = await mailslurp.inboxController.createInboxWithDefaults();
     const response = await request.post(endpoint, {
         headers: header,
         data: {
-            name:"Josh Cuban",
+            name:faker.person.fullName(),
             password:GeneratePassword({symbols: true, minLengthSymbols: 1}),
             email: inbox.emailAddress,
             phone_number:"23480"+GeneratePassword({length:8, numbers:true, lowercase:false, uppercase:false}),
             locale:"en-US",
-            business_name:"Kelvin Xchangee",
-            rc_number:"1712348"
+            business_name:faker.company.name(),
+            rc_number:GeneratePassword({length:8, numbers:true, lowercase:false, uppercase:false})
         }
     })
     expect.soft(response.status()).toBe(200);    // OK
@@ -144,7 +149,7 @@ test('Validate Account creation by providing Full name, Business name and RC num
             name:"********",
             password:GeneratePassword({symbols: true, minLengthSymbols: 1}),
             email: inbox.emailAddress,
-            phone_number:"23490"+GeneratePassword({length:8, numbers:true, lowercase:false, uppercase:false}),
+            phone_number:"23480"+GeneratePassword({length:8, numbers:true, lowercase:false, uppercase:false}),
             locale:"en-US",
             business_name:"#########",
             rc_number:"~~~~~~~~~"
