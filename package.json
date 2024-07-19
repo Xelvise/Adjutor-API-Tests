@@ -1,15 +1,16 @@
 {
   "name": "playwright_ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "End-to-End Functional and Performance testing of Adjutor API Services",
   "main": "index.js",
   "scripts": {
     "regression": "npx playwright test",
-    "ui-test": "npx playwright test tests/UI-test/end-to-end-ui-tests.spec.ts",
+    "ui-test": "npx playwright test tests/UI-test/end-to-end-ui-tests.spec.ts --headed",
+    "ui-test-headless": "npx playwright test tests/UI-test/end-to-end-ui-tests.spec.ts",
     "api-test": "npx playwright test tests/api-test/"
   },
   "keywords": [],
-  "author": "",
+  "author": "Elvis Gideon",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
