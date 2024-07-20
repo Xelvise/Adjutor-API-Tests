@@ -2,7 +2,7 @@ import {GeneratePassword} from 'js-generate-password';
 import { test, expect} from '@playwright/test';
 import { config } from "dotenv";
 
-config({path: './.env'});   // load environment variables from .env file
+config({path: '../.env'});   // load environment variables from .env file
 
 const endpoint = 'https://vigil.lendsqr.com/pecunia/api/v2/auth/admin/login';
 const header = {

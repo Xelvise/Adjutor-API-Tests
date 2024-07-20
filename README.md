@@ -23,13 +23,17 @@ npm run ui-test
 ```bash
 npm run api-test-get
 ```
+- Run the following command to execute end-to-end test on entire API services and UI
+```bash
+npm run regression
+```
 
 
 
 
 
 
-
+- (Here's a breakdown of passed and failed test cases, as at when run)
 
 - See performance report on load and stress test on endpoints requiring GET requests [here](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/db1652384f08cf4e6e4cfa2cec0e641971a377b0/performance-report/GET%20ramp-up%20test%20on%20Adjutor%20API.html)
 
