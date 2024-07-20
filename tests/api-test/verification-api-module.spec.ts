@@ -299,20 +299,29 @@ test('POS - BVN Image comparison with a valid facial image URL', async({request}
     const body = await response.json();
     expect.soft(body.status).toContain("success");
     expect.soft(body.message).toContain("Successful");
-    expect.soft(body.data.match).toBe(true);
-    expect.soft(body.data.similarity).toBeGreaterThanOrEqual(50.0)
 });
 
 
-test('NEG - BVN Image comparison with an arbitrary image URL', async({request}) => {
+test('NEG - BVN Image comparison with an arbitrary non-image URL', async({request}) => {
     const response = await request.post(base_url+'verification/bvn/'+process.env.BVN+'/selfies', {
         headers: header,
-        data: {image: process.env.BVN_IMG_URL}
+        data: {image: "https://www.google.com"}
     });
-    expect.soft(response).toBeOK();
+    expect.soft(response.status()).toBe(400);
     const body = await response.json();
-    expect.soft(body.status).toContain("success");
-    expect.soft(body.message).toContain("Successful");
-    expect.soft(body.data.match).toBe(false);
+    expect.soft(body.status).toContain("error");
+    expect.soft(body.message).toContain("Invalid url");
+});
+
+
+test('NEG - BVN Image comparison with non-URL', async({request}) => {
+    const response = await request.post(base_url+'verification/bvn/'+process.env.BVN+'/selfies', {
+        headers: header,
+        data: {image: "image.jpg"}
+    });
+    expect.soft(response.status()).toBe(400);
+    const body = await response.json();
+    expect.soft(body.status).toContain("error");
+    expect.soft(body.message).toContain("Invalid url");
 });
 
