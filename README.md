@@ -31,7 +31,8 @@ npm run api-test-get
 
 
 
-- See performance report on load test on endpoints requiring GET requests [here](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/0ef680c4c21ee497cd65bcd423baba55758ba8bc/performance-report/Adjutor%20Load%20test%20on%20GET%20requests.html)
+- See performance report on load and stress test on endpoints requiring GET requests [here](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/db1652384f08cf4e6e4cfa2cec0e641971a377b0/performance-report/GET%20ramp-up%20test%20on%20Adjutor%20API.html)
 
 
-- See performance report on load test on endpoints requiring POST requests [here](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/0ef680c4c21ee497cd65bcd423baba55758ba8bc/performance-report/Adjutor%20load%20test%20on%20POST%20request.html)
+- See performance report on load and stress test on endpoints requiring POST requests [here](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/db1652384f08cf4e6e4cfa2cec0e641971a377b0/performance-report/POST%20ramp-up%20test%20on%20Adjutor%20API.html)
+
