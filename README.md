@@ -33,7 +33,7 @@ npm run regression
 
 
 
-- (Here's a breakdown of passed and failed test cases, as at when run)
+- [Here's a breakdown of passed and failed test cases, as at when run](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/599537df192abc0434593ff88b5520c3ce371634/performance-report/Playwright%20test%20result.html)
 
 - See performance report on load and stress test on endpoints requiring GET requests [here](https://rawcdn.githack.com/Xelvise/Adjutor-API-Tests/db1652384f08cf4e6e4cfa2cec0e641971a377b0/performance-report/GET%20ramp-up%20test%20on%20Adjutor%20API.html)
 
