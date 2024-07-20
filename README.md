@@ -32,7 +32,7 @@ npm run ui-test
 ```
 - Run the following command to execute API test on external API modules - such as, Verification, Decisioning, Direct debit and credit bureaus
 ```bash
-npm run api-test-get
+npm run api-test
 ```
 - Run the following command to execute end-to-end test on entire API services (including Signup and Login functionalities)
 ```bash
