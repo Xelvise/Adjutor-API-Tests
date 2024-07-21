@@ -93,7 +93,7 @@ test('NEG - Validate password reset using registered email address', async ({req
 test('NEG - Validate password reset using unregistered email address', async ({request}) => {
     const response = await request.post('https://vigil.lendsqr.com/pecunia/api/v1/auth/reset/admin/password/email', {
         headers: header,
-        data: {email: " ******************** "}
+        data: {email: " talisman001@gmail.com "}
     });
     expect.soft(response.status()).toBe(400);    // Bad Request
     const body = await response.json();
